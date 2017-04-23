@@ -1,0 +1,36 @@
+/* MAIN */
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+/* HEADER */
+
+.main-menu > li > a{
+    font-size: 17px;
+}
+
+
+.product-img{
+    padding:5px;
+}
+
+.img-container {
+    line-height: 230px;
+    height: 230px;
+    text-align: center;
+}
+
+.img-container img{
+    vertical-align: middle;
+    margin:auto;
+
+}
+
+.slick-slide img{
+    display: inline-block;
+}
