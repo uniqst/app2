@@ -86,7 +86,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $options = Options::find()->where(['id' => 1])->one();
+        $products = Product::find()->limit('5')->all();
         $category = Category::find()->where(['parent_id' => 0])->all();
 
 
@@ -125,9 +125,9 @@ class SiteController extends Controller
 //            ->all();
 //    }
 
-        $products = Product::find()->limit('5')->all();
 
-        return $this->render('index', compact('products', 'pagination', 'options', 'category', 'count'));
+
+        return $this->render('index', compact('products','category'));
     }
 
     /**

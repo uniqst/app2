@@ -20,6 +20,8 @@ use app\components\MenuWidget;
 AppAsset::register($this);
 
 //$q = Yii::$app->request->get('q');
+
+$category = Category::find()->where(['parent_id' => 0])->limit(3)->all();
 ?>
 <?php $this->beginPage() ?>
 
@@ -93,7 +95,7 @@ AppAsset::register($this);
                         <!-- logo -->
                         <div class="col-md-2 col-sm-6 col-xs-12">
                             <div class="logo">
-                                <a href="index.html">
+                                <a href="/">
                                     <img style="height:50px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1200px-Google_2015_logo.svg.png" alt="main logo">
                                 </a>
                             </div>
@@ -102,208 +104,42 @@ AppAsset::register($this);
                         <div class="col-md-8 hidden-sm hidden-xs">
                             <nav id="primary-menu">
                                 <ul class="main-menu text-center">
-                                    <li><a href="index.html">Главная</a>
-                                        <ul class="dropdwn">
-                                            <li>
-                                                <a href="index.html">Home Version 1</a>
-                                            </li>
-                                            <li>
-                                                <a href="index-2.html">Home Version 2</a>
-                                            </li>
-                                            <li>
-                                                <a href="index-3.html">Home Version 3</a>
-                                            </li>
-                                            <li>
-                                                <a href="index-4.html">Home 4 Animated Text</a>
-                                            </li>
-                                            <li>
-                                                <a href="index-5.html">Home 5 Animated Text Ovlerlay</a>
-                                            </li>
-                                            <li>
-                                                <a href="index-6.html">Home 6 Background Video</a>
-                                            </li>
-                                            <li>
-                                                <a href="index-7.html">Home 7 BG-Video Ovlerlay</a>
-                                            </li>
-                                            <li>
-                                                <a href="index-8.html">Home 8 Boxed</a>
-                                            </li>
-                                            <li>
-                                                <a href="index-9.html">Home 9 Gradient</a>
-                                            </li>
-                                            <li>
-                                                <a href="index-10.html">Home 10 Boxed-2</a>
-                                            </li>
-                                        </ul>
+                                    <li><a href="/">Главная</a>
                                     </li>
-                                    <li class="mega-parent"><a href="shop.html">Товар</a>
+                                    <li class="mega-parent"><a href="shop.html">Товары</a>
                                         <div class="mega-menu-area clearfix">
                                             <div class="mega-menu-link f-left">
+                                                <?php foreach($category as $cat): ?>
                                                 <ul class="single-mega-item">
-                                                    <li class="menu-title">Smart Phone</li>
-                                                    <li>
-                                                        <a href="#">All Mobile Phones</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">Smart phones</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">Android Mobiles</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">Windows Mobiles</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">Refurbished Mobiles</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">All Mobile Accessories</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">Cases & Covers</a>
-                                                    </li>
+                                                    <li class="menu-title"><?=$cat['name']?></li>
+
+                                                    <? $categ = Category::find()->where(['parent_id' => $cat['id']])->all(); ?>
+                                                    <?php foreach($categ as $c): ?>
+
+                                                        <li><a href="<?= Url::to(['site/category','id'=>$c['id'] ])?>"><?=$c['name'];?></a></li>
+                                                    <?php endforeach;?>
                                                 </ul>
-                                                <ul class="single-mega-item">
-                                                    <li class="menu-title">Note Book</li>
-                                                    <li>
-                                                        <a href="">All Note Books</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="">Smart notebooks</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="">Android Note Book</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="">Windows Note Books</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="">Refurbished Note Books</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="">Note Books Accessories</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="">Cases & Covers</a>
-                                                    </li>
-                                                </ul>
-                                                <ul class="single-mega-item">
-                                                    <li class="menu-title">Tablets</li>
-                                                    <li>
-                                                        <a href="">All Tablets</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="">Smart tablets</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="">Android Tablets</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="">Windows Tablets</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="">Refurbished Tablets</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="">Tablets Accessories</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="">Cases & Covers</a>
-                                                    </li>
-                                                </ul>
+
+                                                <?php endforeach;?>
+
+                                                <?php foreach($category as $cat): ?>
+                                                    <ul class="single-mega-item">
+                                                        <li class="menu-title"><?=$cat['name']?></li>
+
+                                                        <? $categ = Category::find()->where(['parent_id' => $cat['id']])->all(); ?>
+                                                        <?php foreach($categ as $c): ?>
+
+                                                            <li><a href="<?= Url::to(['site/category','id'=>$c['id'] ])?>"><?=$c['name'];?></a></li>
+                                                        <?php endforeach;?>
+                                                    </ul>
+
+                                                <?php endforeach;?>
+                                                
                                             </div>
-                                            <div class="mega-menu-photo f-left">
-                                                <a href="#">
-                                                    <img src="img/mega-menu/1.jpg" alt="mega menu image">
-                                                </a>
-                                            </div>
+
                                         </div>
                                     </li>
-                                    <li class="mega-parent"><a href="#">Pages</a>
-                                        <div class="mega-menu-area mega-menu-area-2 clearfix">
-                                            <div class="mega-menu-link mega-menu-link-2  f-left">
-                                                <ul class="single-mega-item">
-                                                    <li class="menu-title">page list</li>
-                                                    <li>
-                                                        <a href="shop.html">Shop</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-left-sidebar.html">Shop Left Sidebar</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-right-sidebar.html">Shop Right Sidebar</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-list.html">Shop List</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-list-right-sidebar.html">Shop List Right Sidebar</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="single-product.html">Single Product</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="single-product-left-sidebar.html">Single Product Left Sidebar</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="single-product-no-sidebar.html">Single Product No Sidebar</a>
-                                                    </li>
-                                                </ul>
-                                                <ul class="single-mega-item">
-                                                    <li class="menu-title">page list</li>
-                                                    <li>
-                                                        <a href="cart.html">Shopping Cart</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="wishlist.html">Wishlist</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="checkout.html">Checkout</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="order.html">Order</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="login.html">Login</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="My-account.html">My Account</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="about.html">About us</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="404.html">404</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li><a href="blog.html">Blog</a>
-                                        <ul class="dropdwn">
-                                            <li>
-                                                <a href="blog.html">Blog</a>
-                                            </li>
-                                            <li>
-                                                <a href="blog-left-sidebar.html">Blog Left Sidebar</a>
-                                            </li>
-                                            <li>
-                                                <a href="blog-right-sidebar.html">Blog Right Sidebar</a>
-                                            </li>
-                                            <li>
-                                                <a href="blog-2.html">Blog style 2</a>
-                                            </li>
-                                            <li>
-                                                <a href="blog-2-left-sidebar.html">Blog 2 Left Sidebar</a>
-                                            </li>
-                                            <li>
-                                                <a href="blog-2-right-sidebar.html">Blog 2 Right Sidebar</a>
-                                            </li>
-                                            <li>
-                                                <a href="blog-details.html">Blog Details</a>
-                                            </li>
-                                        </ul>
-                                    </li>
+
                                     <li>
                                         <a href="about.html">О нас</a>
                                     </li>
@@ -322,11 +158,11 @@ AppAsset::register($this);
                                         <button class="search-toggle">
                                             <i class="fa fa-search"></i>
                                         </button>
-                                        <form action="#">
+                                        <form method="get" action="/site/search">
                                             <div class="top-search-box">
-                                                <input type="text" placeholder="Search here your product...">
+                                                <input type="text" placeholder="Что вы ищите..." name="q" value="$q">
                                                 <button type="submit">
-                                                    <i class="fa fa-search"></i>
+                                                    <i class="fa fa-search">ddf</i>
                                                 </button>
                                             </div>
                                         </form>
@@ -449,124 +285,32 @@ AppAsset::register($this);
                         <nav id="dropdown">
                             <ul>
                                 <li><a href="index.html">Главная</a>
+                                </li>
+
+
+
+                                <li><a href="blog.html">Товары</a>
+
                                     <ul>
-                                        <li>
-                                            <a href="index.html">Home Version 1</a>
+                                        <?php foreach($category as $cat): ?>
+                                            <? $categ = Category::find()->where(['parent_id' => $cat['id']])->all(); ?>
+                                        <li> <a href="blog-left-sidebar.html"><?=$cat['name']?></a>
+                                            <ul>
+
+                                            <?php foreach($categ as $c): ?>
+                                                <li><a href="<?= Url::to(['site/category','id'=>$c['id'] ])?>"><?=$c['name'];?></a></li>
+                                            <?php endforeach;?>
+                                            </ul>
                                         </li>
-                                        <li>
-                                            <a href="index-2.html">Home Version 2</a>
-                                        </li>
-                                        <li>
-                                            <a href="index-3.html">Home Version 3</a>
-                                        </li>
-                                        <li>
-                                            <a href="index-4.html">Home 4 Animated Text</a>
-                                        </li>
-                                        <li>
-                                            <a href="index-5.html">Home 5 Animated Text Ovlerlay</a>
-                                        </li>
-                                        <li>
-                                            <a href="index-6.html">Home 6 Background Video</a>
-                                        </li>
-                                        <li>
-                                            <a href="index-7.html">Home 7 BG-Video Ovlerlay</a>
-                                        </li>
-                                        <li>
-                                            <a href="index-8.html">Home 8 Boxed-1</a>
-                                        </li>
-                                        <li>
-                                            <a href="index-9.html">Home 9 Gradient</a>
-                                        </li>
-                                        <li>
-                                            <a href="index-10.html">Home 10 Boxed-2</a>
-                                        </li>
+                                        <?php endforeach;?>
                                     </ul>
+
                                 </li>
                                 <li>
-                                    <a href="shop.html">Products</a>
-                                </li>
-                                <li><a href="#">Pages</a>
-                                    <ul>
-                                        <li>
-                                            <a href="shop.html">Shop</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-left-sidebar.html">Shop Left Sidebar</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-right-sidebar.html">Shop Right Sidebar</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-list.html">Shop List</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-list-right-sidebar.html">Shop List Right Sidebar</a>
-                                        </li>
-                                        <li>
-                                            <a href="single-product.html">Single Product</a>
-                                        </li>
-                                        <li>
-                                            <a href="single-product-left-sidebar.html">Single Product Left Sidebar</a>
-                                        </li>
-                                        <li>
-                                            <a href="single-product-no-sidebar.html">Single Product No Sidebar</a>
-                                        </li>
-                                        <li>
-                                            <a href="cart.html">Shopping Cart</a>
-                                        </li>
-                                        <li>
-                                            <a href="wishlist.html">Wishlist</a>
-                                        </li>
-                                        <li>
-                                            <a href="checkout.html">Checkout</a>
-                                        </li>
-                                        <li>
-                                            <a href="order.html">Order</a>
-                                        </li>
-                                        <li>
-                                            <a href="login.html">Login</a>
-                                        </li>
-                                        <li>
-                                            <a href="My-account.html">My Account</a>
-                                        </li>
-                                        <li>
-                                            <a href="about.html">About us</a>
-                                        </li>
-                                        <li>
-                                            <a href="404.html">404</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a href="blog.html">Blog</a>
-                                    <ul>
-                                        <li>
-                                            <a href="blog.html">Blog</a>
-                                        </li>
-                                        <li>
-                                            <a href="blog-left-sidebar.html">Blog Left Sidebar</a>
-                                        </li>
-                                        <li>
-                                            <a href="blog-right-sidebar.html">Blog Right Sidebar</a>
-                                        </li>
-                                        <li>
-                                            <a href="blog-2.html">Blog style 2</a>
-                                        </li>
-                                        <li>
-                                            <a href="blog-2-left-sidebar.html">Blog 2 Left Sidebar</a>
-                                        </li>
-                                        <li>
-                                            <a href="blog-2-right-sidebar.html">Blog 2 Right Sidebar</a>
-                                        </li>
-                                        <li>
-                                            <a href="blog-details.html">Blog Details</a>
-                                        </li>
-                                    </ul>
+                                    <a href="about.html">О нас</a>
                                 </li>
                                 <li>
-                                    <a href="about.html">About Us</a>
-                                </li>
-                                <li>
-                                    <a href="contact.html">Contact</a>
+                                    <a href="contact.html">Контакты</a>
                                 </li>
                             </ul>
                         </nav>
@@ -576,6 +320,7 @@ AppAsset::register($this);
         </div>
     </div>
     <!-- END MOBILE MENU AREA -->
+
     <!-- END HEADER AREA -->
 
     <div class="content">

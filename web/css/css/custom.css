@@ -34,3 +34,18 @@ body {
 .slick-slide img{
     display: inline-block;
 }
+
+.single-mega-item{
+    width:23%;
+    margin-top:40px;
+}
+
+
+.single-mega-item .menu-title{
+    font-size: 18px;
+    padding-bottom: 15px;
+}
+
+.mega-menu-area{
+    padding-top: 20px;
+}

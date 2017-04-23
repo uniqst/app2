@@ -16,7 +16,37 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="product">
     <div class="container">
 
-
+        <div class="slider-area theme-bg ptb-150 mb-80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="slider-desc-3 slider-desc-4  text-center">
+                            <div class="wow fadeInUp" data-wow-duration="1s" data-wow-delay="1s">
+                                <h1 class="slider2-title-2 cd-headline clip is-full-width">
+                                    <span>New smart phone</span>
+                                    <span class="cd-words-wrapper">
+                                        <b class="is-visible">Samsung</b>
+                                        <b>Apple</b>
+                                        <b>Microsoft</b>
+                                        <b>Nokia</b>
+                                        <b>Sony</b>
+                                    </span>
+                                </h1>
+                            </div>
+                            <div class="wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.5s">
+                                <h2 class="slider2-title-3">Samsung grand 6</h2>
+                            </div>
+                            <div class="slider-button wow fadeInUp" data-wow-duration="1s" data-wow-delay="2.5s">
+                                <a href="#" class="button extra-small button-white">
+                                    <span class="text-uppercase">Buy now</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <!-- Start page content -->
         <section id="page-content" class="page-wrapper">
 
@@ -36,33 +66,33 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 <div class="col-xs-12">
                                                     <div id="gallery_01" class="carousel-btn slick-arrow-3 mt-30">
                                                         <div class="p-c">
-                                                            <a href="#" data-image="img/product/2.jpg" data-zoom-image="img/product/2.jpg">
-                                                                <img class="zoom_03" src="img/product/2.jpg" alt="">
+                                                            <a href="#" data-image="<?=Url::to(['web/'.$product->photo])?>" data-zoom-image="<?=Url::to(['web/'.$product->photo])?>">
+                                                                <img class="zoom_03" src="<?=Url::to(['web/'.$product->photo])?>" alt="">
                                                             </a>
                                                         </div>
                                                         <div class="p-c">
-                                                            <a href="#" data-image="img/product/3.jpg" data-zoom-image="img/product/3.jpg">
-                                                                <img class="zoom_03" src="img/product/3.jpg" alt="">
+                                                            <a href="#" data-image="<?=Url::to(['web/'.$product->photo])?>" data-zoom-image="<?=Url::to(['web/'.$product->photo])?>">
+                                                                <img class="zoom_03" src="<?=Url::to(['web/'.$product->photo])?>" alt="">
                                                             </a>
                                                         </div>
                                                         <div class="p-c">
-                                                            <a href="#" data-image="img/product/4.jpg" data-zoom-image="img/product/4.jpg">
-                                                                <img class="zoom_03" src="img/product/4.jpg" alt="">
+                                                            <a href="#" data-image="<?=Url::to(['web/'.$product->photo])?>" data-zoom-image="<?=Url::to(['web/'.$product->photo])?>">
+                                                                <img class="zoom_03" src="<?=Url::to(['web/'.$product->photo])?>" alt="">
                                                             </a>
                                                         </div>
                                                         <div class="p-c">
-                                                            <a href="#" data-image="img/product/5.jpg" data-zoom-image="img/product/5.jpg">
-                                                                <img class="zoom_03" src="img/product/5.jpg" alt="">
+                                                            <a href="#" data-image="<?=Url::to(['web/'.$product->photo])?>" data-zoom-image="img/product/5.jpg">
+                                                                <img class="zoom_03" src="<?=Url::to(['web/'.$product->photo])?>" alt="">
                                                             </a>
                                                         </div>
                                                         <div class="p-c">
-                                                            <a href="#" data-image="img/product/6.jpg" data-zoom-image="img/product/6.jpg">
-                                                                <img class="zoom_03" src="img/product/6.jpg" alt="">
+                                                            <a href="#" data-image="<?=Url::to(['web/'.$product->photo])?>" data-zoom-image="img/product/6.jpg">
+                                                                <img class="zoom_03" src="<?=Url::to(['web/'.$product->photo])?>" alt="">
                                                             </a>
                                                         </div>
                                                         <div class="p-c">
-                                                            <a href="#" data-image="img/product/7.jpg" data-zoom-image="img/product/7.jpg">
-                                                                <img class="zoom_03" src="img/product/7.jpg" alt="">
+                                                            <a href="#" data-image="<?=Url::to(['web/'.$product->photo])?>" data-zoom-image="<?=Url::to(['web/'.$product->photo])?>">
+                                                                <img class="zoom_03" src="<?=Url::to(['web/'.$product->photo])?>" alt="">
                                                             </a>
                                                         </div>
                                                     </div>
