@@ -2,6 +2,8 @@
 
 /* @var $this yii\web\View */
 
+use yii\helpers\Url;
+
 $this->title = $product['name'];
 
 $this->params['breadcrumbs'][] = ['label' => 'Главная', 'url' => ['/']];
@@ -29,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <!-- imgs-zoom-area start -->
                                     <div class="col-md-5 col-sm-5 col-xs-12">
                                         <div class="imgs-zoom-area">
-                                            <img id="zoom_03" src="img/product/6.jpg" data-zoom-image="img/product/6.jpg" alt="">
+                                            <img id="zoom_03" src="<?=Url::to(['web/'.$product->photo])?>" data-zoom-image="img/product/6.jpg" alt="">
                                             <div class="row">
                                                 <div class="col-xs-12">
                                                     <div id="gallery_01" class="carousel-btn slick-arrow-3 mt-30">
@@ -72,24 +74,30 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <!-- single-product-info start -->
                                     <div class="col-md-7 col-sm-7 col-xs-12">
                                         <div class="single-product-info">
-                                            <h3 class="text-black-1">Dummy Product Name </h3>
+                                            <h3 class="text-black-1"><?= $product['name']?></h3>
                                             <h6 class="brand-name-2">brand name</h6>
                                             <!-- hr -->
                                             <hr>
                                             <!-- single-product-tab -->
                                             <div class="single-product-tab">
                                                 <ul class="reviews-tab mb-20">
-                                                    <li  class="active"><a href="#description" data-toggle="tab">description</a></li>
-                                                    <li ><a href="#information" data-toggle="tab">information</a></li>
-                                                    <li ><a href="#reviews" data-toggle="tab">reviews</a></li>
+                                                    <li  class="active"><a href="#description" data-toggle="tab">Описание</a></li>
+                                                    <li ><a href="#information" data-toggle="tab">информация</a></li>
+                                                    <li ><a href="#reviews" data-toggle="tab">отзывы</a></li>
                                                 </ul>
                                                 <div class="tab-content">
                                                     <div role="tabpanel" class="tab-pane active" id="description">
-                                                        <p>There are many variations of passages of Lorem Ipsum available, but the majo Rity have be suffered alteration in some form, by injected humou or randomis Rity have be suffered alteration in some form, by injected humou or randomis words which donot look even slightly believable. If you are going to use a passage Lorem Ipsum.</p>
+                                                        <?= $product['description']?>
                                                     </div>
                                                     <div role="tabpanel" class="tab-pane" id="information">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem, neque fugit inventore quo dignissimos est iure natus quis nam illo officiis,  deleniti consectetur non ,aspernatur.</p>
-                                                        <p>rerum blanditiis dolore dignissimos expedita consequatur deleniti consectetur non exercitationem.</p>
+                                                         <table class="table">
+                                                            <?php foreach ($incat as $in){ ?>
+                                                                <tr>
+                                                                    <td><?=$in->name?></td>
+                                                                    <td><?=$in->catOption->value?></td>
+                                                                </tr>
+                                                            <?php }?>
+                                                        </table>
                                                     </div>
                                                     <div role="tabpanel" class="tab-pane" id="reviews">
                                                         <!-- reviews-tab-desc -->

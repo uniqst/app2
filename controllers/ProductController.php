@@ -25,14 +25,20 @@ use yii\data\Pagination;
 
 class ProductController extends Controller
 {
+    public $layout = 'main3';
+
     public function actionView($id)
     {
-        $id = Yii::$app->request->get('id');
-        $product = Product::findOne($id);
-
-        //$categoryName = Category::find()->where(['id'=>$catId])->one();
-        //return $this->render('single-product',compact('product','categoryName'));
-
-        return $this->render('view',compact('product'));
+        $category = Category::find()->where(['parent_id' => 0])->all();
+        $prod = Product::find()->where(['id' => $id])->one();
+        $incat = InCategory::find()->where(['category_id' => $prod->category_id
+        ])->with('catOption')->all();
+        return $this->render('view', [
+            'id' => $id,
+            'product' => $prod,
+            'title' => $prod->name,
+            'category' => $category,
+            'incat' => $incat,
+        ]);
     }
 }

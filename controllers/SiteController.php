@@ -30,6 +30,7 @@ class SiteController extends Controller
      */
 
     public $layout = 'main3';
+
     public function behaviors()
     {
         return [
@@ -83,23 +84,23 @@ class SiteController extends Controller
      *
      * @return string
      */
-public function actionIndex()
-{
-    $options = Options::find()->where(['id' => 1])->one();
-    $category = Category::find()->where(['parent_id' => 0])->all();
+    public function actionIndex()
+    {
+        $options = Options::find()->where(['id' => 1])->one();
+        $category = Category::find()->where(['parent_id' => 0])->all();
 
 
 //    d($category);
 
 
-    // $pagination = new Pagination([
-    //     'defaultPageSize' => $options->size_product,
-    //     'totalCount' => $product->count(),
-    //     ]);
-    // $product = $product
-    // ->offset($pagination->offset)
-    // ->limit($pagination->limit)
-    // ->all();
+        // $pagination = new Pagination([
+        //     'defaultPageSize' => $options->size_product,
+        //     'totalCount' => $product->count(),
+        //     ]);
+        // $product = $product
+        // ->offset($pagination->offset)
+        // ->limit($pagination->limit)
+        // ->all();
 //
 //    $order = Order::find()->where(['status' => '1'])->all();
 //    $top = [];
@@ -124,10 +125,10 @@ public function actionIndex()
 //            ->all();
 //    }
 
-    $products = Product::find()->limit('5')->all();
+        $products = Product::find()->limit('5')->all();
 
-    return $this->render('index', compact('products','pagination', 'options', 'category', 'count'));
-}
+        return $this->render('index', compact('products', 'pagination', 'options', 'category', 'count'));
+    }
 
     /**
      * Login action.
@@ -157,7 +158,7 @@ public function actionIndex()
      * @return string
      */
     public function actionLogout()
-    {   
+    {
 
         Yii::$app->user->logout();
 
@@ -191,8 +192,9 @@ public function actionIndex()
     {
         $qwe = new Qwe();
         $ewq = new Ewq();
-        if($qwe->load(Yii::$app->request->post()) && $qwe->save() 
-        && $ewq->load(Yii::$app->request->post()) && $ewq->save()){
+        if ($qwe->load(Yii::$app->request->post()) && $qwe->save()
+            && $ewq->load(Yii::$app->request->post()) && $ewq->save()
+        ) {
         }
         return $this->render('about', compact('qwe', 'ewq'));
     }
@@ -210,41 +212,41 @@ public function actionIndex()
         $pagination = new Pagination([
             'defaultPageSize' => 9,
             'totalCount' => $product->count(),
-            ]);
+        ]);
         $product = $product
-        ->offset($pagination->offset)
-        ->limit($pagination->limit)
-        ->all();
-      
-        return $this->render('catalog', compact('product','pagination'));
+            ->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
+
+        return $this->render('catalog', compact('product', 'pagination'));
     }
 
     public function actionProduct()
     {
         $product = Product::find()->all();
-        return $this->render('product',[
+        return $this->render('product', [
             'product' => $product,
-            ]);
+        ]);
     }
 
-     public function actionSingleProduct($id)
+    public function actionSingleProduct($id)
     {
-     $category = Category::find()->where(['parent_id' => 0])->all();
-     $prod = Product::find()->where(['id' => $id])->one();
-     $incat = Incategory::find()->where(['category_id' => $prod->category_id
+        $category = Category::find()->where(['parent_id' => 0])->all();
+        $prod = Product::find()->where(['id' => $id])->one();
+        $incat = Incategory::find()->where(['category_id' => $prod->category_id
         ])->with('catOption')->all();
-     return $this->render('single-product', [
-        'id' => $id,
-        'prod' => $prod,
-        'title' => $prod->name,
-        'category' => $category,
-        'incat' => $incat,
+        return $this->render('single-product', [
+            'id' => $id,
+            'prod' => $prod,
+            'title' => $prod->name,
+            'category' => $category,
+            'incat' => $incat,
         ]);
 
     }
 
-     public function actionSearch()
-     {
+    public function actionSearch()
+    {
         $q = Yii::$app->request->get('q');
         $query = Product::find()->where(['like', 'name', $q]);
         $pagination = new Pagination([
@@ -252,37 +254,37 @@ public function actionIndex()
             'pageSize' => 9,
             'forcePageParam' => false,
             'pageSizeParam' => false
-         ]);
+        ]);
         $product = $query
-        ->offset($pagination->offset)
-        ->limit($pagination->limit)
-        ->all(); 
+            ->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
         return $this->render('search', compact('product', 'pagination', 'q'));
-     }
+    }
 
-     public function actionPages()
-     {
+    public function actionPages()
+    {
         $alias = Yii::$app->request->get('alias');
         $pages = Pages::find()->where(['alias' => $alias])->one();
         return $this->render('pages', compact('pages'));
-     }
+    }
 
-     public function actionCategory($id)
-     {
-    $cat = InCategory::find()->where(['category_id' => Yii::$app->request->get('id')])->all();
-      $product = Product::find()->where(['category_id' => $id])->with('category')->all();
-      if (empty($product)){
-        $categ = Category::find()->where(['parent_id' => $id])->all();
-        $ca = [];
-        foreach($categ as $cat){
-            $ca [] = $cat->id;
+    public function actionCategory($id)
+    {
+        $cat = InCategory::find()->where(['category_id' => Yii::$app->request->get('id')])->all();
+        $product = Product::find()->where(['category_id' => $id])->with('category')->all();
+        if (empty($product)) {
+            $categ = Category::find()->where(['parent_id' => $id])->all();
+            $ca = [];
+            foreach ($categ as $cat) {
+                $ca [] = $cat->id;
+            }
+            $cat = InCategory::find()->where(['category_id' => $ca])->all();
+            $product = Product::find()->where(['category_id' => $ca])->with('category')->all();
         }
-        $cat = InCategory::find()->where(['category_id' => $ca])->all();
-        $product = Product::find()->where(['category_id' => $ca])->with('category')->all();
-      }
-    $title = Category::find()->where(["id" => $id])->one();
-      return $this->render('category', compact('product', 'cat', 'title'));
-     }
-    
+        $title = Category::find()->where(["id" => $id])->one();
+        return $this->render('category', compact('product', 'cat', 'title'));
+    }
+
 
 }
